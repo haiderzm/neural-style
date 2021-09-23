@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
+    <style>
+        /* body{
+            background:url('../static/bg.jpg') no-repeat center fixed;
+            background-size: cover;
+        } */
+        .page-header {
+            margin-top: 0px;
+            font-family: 'Birthstone', cursive;
+            font-size:80px;
+            color:rgb(139, 0, 104);
+            text-align:center;
+        }
+        .main-section{
+            display:block;
+            margin:15px auto;
+            text-align:center;
+        }
+        .main-text{
+            font-size:22px;
+        }
+        .image-section{
+            display:block;
+            margin:15px;
+            text-align:center;
+        }
+        .image{
+            margin:7px auto;
+            border: 3px dashed black;
+            border-radius: 5px;
+            height:400px;
+            width:400px;
+        }
+        .btn{
+            font-size: 20px;
+            color: white;
+            border:none;
+            border-radius: 20px;
+            padding:15px 15px;
+            background:rgb(139, 17, 221);
+        }
+        .btn:hover{
+            cursor:pointer;
+            background:rgb(86, 15, 144);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-header">Neural Art</h1>
+    <form action = '/generate' method='post' enctype="multipart/form-data">
+    <div class = "main-section">
+        <span class = 'main-text'>Content Image: </span><input type = 'file' id='content-selector' name="contentimage">
+        <span class = 'main-text'>Style Image: </span><input type = 'file' id='style-selector' name="styleimage">
+    </div>
+    <div class = 'image-section'>
+        <img class='image' src='' id='content-img' >
+        <img class='image' src='' id='style-img' >
+    </div>
+    <div class='main-section'>
+        <input type="submit" value = 'Generate' class = 'btn' id='gen-btn'>
+    </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#content-selector").change(function() {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let dataURL = reader.result;
+                $('#content-img').attr("src", dataURL);
+            }
+            reader.readAsDataURL($("#content-selector")[0].files[0]);
+            
+        });
+        $("#style-selector").change(function() {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let dataURL = reader.result;
+                $('#style-img').attr("src", dataURL);
+            }
+            reader.readAsDataURL($("#style-selector")[0].files[0]);
+        });   
+    </script>
+</body>
+</html>
